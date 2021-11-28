@@ -1,2 +1,2 @@
 # ExchangeRate
-ExchangeRate is a RESTFUL service that provides user exchange rates or currencies upon requests. 
+ExchangeRate is a RESTFUL service that provides user exchange rates of currencies upon requests. 
