@@ -1,32 +1,30 @@
 package com.github.tzzzzzb.check_exchange_rate.sourcefetch;
 
 import com.github.tzzzzzb.check_exchange_rate.model.ExchangeRates;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-
+import org.springframework.stereotype.Component;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-@Configuration
-@EnableAsync
-public class SourceFetcherConfig {
+import static java.util.concurrent.TimeUnit.HOURS;
+
+@Component
+public class SourceFetcher {
     private final ExchangeRates currentRates;
     private final Lock writeLock;
     private final Lock readLock;
 
-    public SourceFetcherConfig() {
-        this.currentRates = new ExchangeRates();
+    public SourceFetcher() {
+        currentRates = new ExchangeRates();
         ReadWriteLock lock = new ReentrantReadWriteLock();
         writeLock = lock.writeLock();
         readLock = lock.readLock();
-    }
 
-    @Async
-    public void updateCurrentRatesPeriodically() {
         updateCurrentRates();
-        //TODO: run updates repeatedly
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::updateCurrentRates, 1, 1, HOURS);
     }
 
     private void updateCurrentRates() {
