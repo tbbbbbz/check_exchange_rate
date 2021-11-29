@@ -2,29 +2,28 @@ package com.github.tzzzzzb.check_exchange_rate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ExchangeRates implements Cloneable{
+public class ExchangeRates {
     private String timestamp;
     private String base;
     private Map<String, Float> rates;
 
 
-    @Override
-    public Object clone() {
-        ExchangeRates rates;
-        try {
-            rates = (ExchangeRates) super.clone();
-        } catch (CloneNotSupportedException e) {
-            rates = new ExchangeRates();
-            rates.setTimestamp(this.timestamp);
-            rates.setBase(this.base);
-            rates.setRates(new HashMap<>(this.rates));
+    public ExchangeRates deepCopy() {
+        ExchangeRates clone = new ExchangeRates();
+        clone.setTimestamp(timestamp);
+        clone.setBase(base);
+        if (rates != null) {
+            clone.setRates(new HashMap<>(rates));
         }
-        return rates;
+        return clone;
     }
 }

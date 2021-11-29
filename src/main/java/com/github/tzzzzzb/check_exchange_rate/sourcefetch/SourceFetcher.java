@@ -48,7 +48,7 @@ public class SourceFetcher {
     public ExchangeRates getCurrentRates() {
         try {
             readLock.lock();
-            return (ExchangeRates) currentRates.clone();
+            return currentRates.deepCopy();
         }
         finally {
             readLock.unlock();
