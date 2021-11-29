@@ -1,18 +1,17 @@
 package com.github.tzzzzzb.check_exchange_rate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Document("exchange_rates")
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ExchangeRates implements Cloneable{
-    @Id
-    private String date;
-    private Map<String, Float> currencyPriceMapping;
+    private String timestamp;
+    private String base;
+    private Map<String, Float> rates;
 
 
     @Override
@@ -22,8 +21,9 @@ public class ExchangeRates implements Cloneable{
             rates = (ExchangeRates) super.clone();
         } catch (CloneNotSupportedException e) {
             rates = new ExchangeRates();
-            rates.setDate(this.date);
-            rates.setCurrencyPriceMapping(new HashMap<>(currencyPriceMapping));
+            rates.setTimestamp(this.timestamp);
+            rates.setBase(this.base);
+            rates.setRates(new HashMap<>(this.rates));
         }
         return rates;
     }
