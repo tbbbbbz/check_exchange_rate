@@ -9,4 +9,5 @@ public class CheckExchangeRateApplication {
     public static void main(String[] args) {
         SpringApplication.run(CheckExchangeRateApplication.class, args);
     }
+
 }

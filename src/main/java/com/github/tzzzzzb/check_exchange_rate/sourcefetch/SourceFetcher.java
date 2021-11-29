@@ -10,7 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import static java.util.concurrent.TimeUnit.HOURS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 @Component
 public class SourceFetcher {
@@ -30,7 +30,7 @@ public class SourceFetcher {
 
         updateCurrentRates();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(this::updateCurrentRates, properties.getInterval(), properties.getInterval(), HOURS);
+        scheduler.scheduleAtFixedRate(this::updateCurrentRates, properties.getInterval(), properties.getInterval(), MILLISECONDS);
     }
 
     private void updateCurrentRates() {
