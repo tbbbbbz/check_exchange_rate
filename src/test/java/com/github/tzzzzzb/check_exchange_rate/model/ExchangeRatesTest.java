@@ -1,13 +1,13 @@
 package com.github.tzzzzzb.check_exchange_rate.model;
 
-import com.github.tzzzzzb.check_exchange_rate.util.SampleUtils;
+import com.github.tzzzzzb.check_exchange_rate.util.SampleFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.HashMap;
 
-import static com.github.tzzzzzb.check_exchange_rate.util.SampleUtils.assertDeepCopied;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 class ExchangeRatesTest {
@@ -15,7 +15,7 @@ class ExchangeRatesTest {
 
     @BeforeEach
     public void setupOldER() {
-        oldER = SampleUtils.getSample();
+        oldER = SampleFactory.getSample();
     }
 
     @Test
@@ -24,7 +24,9 @@ class ExchangeRatesTest {
     }
 
     private void assertDeepCopyCorrection() {
-        assertDeepCopied(oldER.deepCopy(), oldER);
+        ExchangeRates clone = oldER.deepCopy();
+        assertEquals(clone, oldER);
+        assertNotSame(clone, oldER);
     }
 
 

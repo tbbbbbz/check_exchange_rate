@@ -2,7 +2,7 @@ package com.github.tzzzzzb.check_exchange_rate.sourcefetch;
 
 import com.github.tzzzzzb.check_exchange_rate.model.ExchangeRates;
 import com.github.tzzzzzb.check_exchange_rate.testconfig.TestConfig;
-import com.github.tzzzzzb.check_exchange_rate.util.SampleUtils;
+import com.github.tzzzzzb.check_exchange_rate.util.SampleFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,13 +37,13 @@ class SourceFetcherTest {
     @Test
     void givenSourceFetcher_whenGetCurrentRates_returnAnExchangeRateObject() {
         ExchangeRates er = sourceFetcher.getCurrentRates();
-        assertEquals(SampleUtils.getSample(), er);
+        assertEquals(SampleFactory.getSample(), er);
     }
 
     @Test
     void givenSourceUpdated_whenGetCurrentRates_returnTheUpdatedObject() throws InterruptedException {
-        ExchangeRates oldER = SampleUtils.getSample();
-        ExchangeRates updatedER = updateSourceExchangeRate(SampleUtils.getSample());
+        ExchangeRates oldER = SampleFactory.getSample();
+        ExchangeRates updatedER = updateSourceExchangeRate(SampleFactory.getSample());
         assertTrue(isAbleToGetUpdatedSource(updatedER, oldER));
     }
 
@@ -100,8 +100,8 @@ class SourceFetcherTest {
         for (int repeat = 0; repeat < 10; repeat++) {
             resetRestTemplate();
 
-            ExchangeRates oldER = SampleUtils.getSample();
-            ExchangeRates updatedER = updateSourceExchangeRate(SampleUtils.getSample());
+            ExchangeRates oldER = SampleFactory.getSample();
+            ExchangeRates updatedER = updateSourceExchangeRate(SampleFactory.getSample());
 
             AtomicBoolean pass = new AtomicBoolean(true);
             for (int i = 0; i < 20; i++) {
@@ -121,7 +121,7 @@ class SourceFetcherTest {
     }
 
     private void resetRestTemplate() {
-        when(restTemplate.getForObject(anyString(), any())).thenReturn(SampleUtils.getSample());
+        when(restTemplate.getForObject(anyString(), any())).thenReturn(SampleFactory.getSample());
     }
 
 }
