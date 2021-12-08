@@ -1,7 +1,7 @@
 package com.github.tzzzzzb.check_exchange_rate.sourcefetch;
 
 import com.github.tzzzzzb.check_exchange_rate.model.ExchangeRates;
-import com.github.tzzzzzb.check_exchange_rate.testconfig.TestConfig;
+import com.github.tzzzzzb.check_exchange_rate.testconfig.RestTemplateOverrider;
 import com.github.tzzzzzb.check_exchange_rate.util.SampleFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = TestConfig.class)
+@SpringBootTest(classes = RestTemplateOverrider.class)
 @ActiveProfiles("test")
 class SourceFetcherTest {
     @Autowired

@@ -12,9 +12,11 @@ public class SampleFactory {
         er.setBase("USD");
         er.setTimestamp("1111");
         Map<String, Float> erMap = new HashMap<>();
-        erMap.put("AED", (float) 4.4);
-        erMap.put("AFN", (float) 95.889778);
-        erMap.put("BBD", (float) 2);
+        erMap.put("AED", 4.4f);
+        erMap.put("AFN", 95.889778f);
+        erMap.put("BBD", 2f);
+        erMap.put("CNY", 6f);
+        erMap.put("USD", 1f);
         er.setRates(erMap);
         return er;
     }

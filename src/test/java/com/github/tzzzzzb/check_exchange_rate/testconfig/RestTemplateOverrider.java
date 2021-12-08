@@ -11,7 +11,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @TestConfiguration
-public class TestConfig {
+public class RestTemplateOverrider {
     @Bean
     RestTemplate restTemplate() {
         RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
