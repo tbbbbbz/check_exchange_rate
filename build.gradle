@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.github.tzzzzzb'
-version = '0.0.1-SNAPSHOT'
+version = 'v1.0.0-beta'
 sourceCompatibility = '11'
 
 configurations {
